@@ -1,0 +1,108 @@
+# ЭлектрКўрик — электр қурилмаларни кўрикдан ўтказиш тизими
+
+Тайёр Vite + React лойиҳаси. Backend — **Appwrite Cloud** (бепул): авторизация, маълумотлар базаси, расмлар хотираси.
+
+> Бу архивда `node_modules` йўқ — у керак эмас. GitHub'га юклаганингизда Vercel керакли кутубхоналарни ўзи ўрнатади.
+
+---
+
+## А қисми. Appwrite backend'ни созлаш
+
+### 1. Лойиҳа
+1. https://cloud.appwrite.io — рўйхатдан ўтинг (карта талаб қилинмайди).
+2. **Create project** → ном (`elektr-korik`), ҳудуд **Frankfurt (fra)** (Ўзбекистонга энг яқини).
+3. **Settings** дан **Project ID** ва **API Endpoint** ни кўчириб олинг.
+4. **Overview → Add platform → Web**. Hostname'га: `localhost` ва кейинроқ Vercel доменингизни (мас: `elektr-korik.vercel.app`) қўшинг.
+
+### 2. Маълумотлар базаси
+**Databases → Create database** (ном: `main`). **Database ID** ни кўчиринг.
+
+**«inspections» collection** (Collection ID: `inspections`) — атрибутлар:
+
+| key | тур | ўлчам |
+|---|---|---|
+| name | String | 255 |
+| type | String | 255 |
+| owner | String | 255 |
+| invNo | String | 255 |
+| location | String | 255 |
+| inspector | String | 255 |
+| params | String | 8000 |
+| defectIds | String | 4000 |
+| status | String | 20 |
+| note | String | 8000 |
+| photoIds | String | 4000 |
+| createdAt | String | 40 |
+| updatedAt | String | 40 |
+| userId | String | 64 |
+
+→ **Indexes → Create index**: key `createdAt_idx`, type `key`, attribute `createdAt`, order **DESC**.
+→ **Settings → Permissions**: Role **Users** = Create, Read, Update, Delete.
+
+**«defects» collection** (Collection ID: `defects`) — битта атрибут:
+
+| key | тур | ўлчам |
+|---|---|---|
+| data | String | 200000 |
+
+→ Permissions: Role **Users** = Create, Read, Update, Delete.
+
+### 3. Расмлар хотираси
+**Storage → Create bucket** (Bucket ID: `photos`):
+- Maximum file size: **10 MB**
+- Allowed extensions: `jpg, jpeg, png, webp`
+- **File security: OFF**
+- Permissions: **Any** = Read; **Users** = Create, Update, Delete.
+
+### 4. Авторизация
+**Auth → Settings** да **Email/Password** ёқилган бўлсин (стандарт ёқилган).
+
+---
+
+## Б қисми. GitHub'га юклаш (терминалсиз)
+
+1. https://github.com → **New repository** → ном беринг (мас: `elektr-korik`) → **Create**.
+2. Бўш репозиторий саҳифасида **uploading an existing file** ҳаволасини босинг.
+3. Бу архивни компьютерда **очиб (extract)**, ичидаги БАРЧА файл ва папкаларни (`src` папкаси, `index.html`, `package.json`, `vite.config.js`, `vercel.json`, `.gitignore`, `.env.example`) GitHub саҳифасига **судраб ташланг (drag & drop)**.
+   - ⚠️ Папка эмас, унинг **ичидаги нарсаларни** ташланг (репозиторий илдизида `package.json` туриши керак).
+4. Пастда **Commit changes** ни босинг.
+
+## В қисми. Vercel'га улаш
+
+1. https://vercel.com → **Add New → Project** → GitHub репозиторийингизни танланг → **Import**.
+2. Vercel автомат **Vite** ни аниқлайди (Build: `npm run build`, Output: `dist`). Ўзгартирмасликингиз мумкин.
+3. **Environment Variables** бўлимини очиб, 6 та ўзгарувчини қўшинг (`.env.example` дан, ўз қийматларингиз билан):
+   ```
+   VITE_APPWRITE_ENDPOINT   = https://fra.cloud.appwrite.io/v1
+   VITE_APPWRITE_PROJECT    = ...
+   VITE_APPWRITE_DB         = ...
+   VITE_APPWRITE_COL_INSPECTIONS = inspections
+   VITE_APPWRITE_COL_DEFECTS = defects
+   VITE_APPWRITE_BUCKET     = photos
+   ```
+4. **Deploy** ни босинг.
+
+> ❗️ Environment Variables'ни киритмасангиз — оқ экран ёки уланиш хатоси чиқади. Уларни киритгач, **Deployments → ... → Redeploy** қилинг.
+
+## Г қисми. Биринчи ишга тушириш
+1. Vercel берган домен орқали дастурни очинг.
+2. **Рўйхатдан ўтиш** орқали биринчи аккаунтни яратинг (парол ≥ 8 белги).
+3. Кирганингиздан сўнг камчиликлар базаси 12 та намуна билан тўлади. Тайёр!
+
+---
+
+## Текшириш рўйхати (404 ёки оқ экран бўлса)
+- [ ] Репозиторий илдизида `package.json` ва `index.html` борми?
+- [ ] Vercel'да Framework = **Vite**, Output = **dist** ми?
+- [ ] 6 та `VITE_...` ўзгарувчи Vercel'га киритилганми?
+- [ ] Appwrite'да Web platform hostname'га Vercel доменингиз қўшилганми?
+- [ ] `vercel.json` файли репозиторийда борми? (саҳифа янгиланганда 404 бўлмаслиги учун)
+
+## Маҳаллий синаш (ихтиёрий, агар Node.js ўрнатган бўлсангиз)
+```
+npm install
+npm run dev
+```
+
+## Хотира лимити ҳақида
+Расмлар сақлашдан олдин автомат сиқилади (~150–300 КБ), битта кўрик ~1 МБ. Шу сабабли Appwrite бепул хотираси минглаб кўрикка етади — Supabase'даги тўлиш муаммоси такрорланмайди.

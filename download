@@ -1,0 +1,10 @@
+# Appwrite созламалари — қийматларни Appwrite console'дан кўчиринг.
+# Маҳаллий синаш учун: бу файлдан нусха олиб `.env.local` яратинг.
+# Vercel'да: Project → Settings → Environment Variables бўлимига киритинг.
+
+VITE_APPWRITE_ENDPOINT=https://fra.cloud.appwrite.io/v1
+VITE_APPWRITE_PROJECT=ПРОЕКТ_ID_шу_ерга
+VITE_APPWRITE_DB=БАЗА_ID_шу_ерга
+VITE_APPWRITE_COL_INSPECTIONS=inspections
+VITE_APPWRITE_COL_DEFECTS=defects
+VITE_APPWRITE_BUCKET=photos

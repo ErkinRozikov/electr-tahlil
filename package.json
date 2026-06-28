@@ -1,0 +1,24 @@
+{
+  "name": "elektr-korik",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "appwrite": "^26.0.0",
+    "docxtemplater": "^3.69.0",
+    "lucide-react": "^0.460.0",
+    "pizzip": "^3.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7",
+    "vite-plugin-pwa": "^0.21.1"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/aw/:path*", "destination": "https://fra.cloud.appwrite.io/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

@@ -16,21 +16,19 @@ const C = {
   good: "#15803d", goodBg: "#e7f6ec", attn: "#b45309", attnBg: "#fdf3e3", fault: "#b91c1c", faultBg: "#fdeaea",
 };
 const SEV = {
-  critical: { label: "Критик", color: "#b91c1c", bg: "#fdeaea", rank: 4 },
+  critical: { label: "Хавфли", color: "#b91c1c", bg: "#fdeaea", rank: 4 },
   high: { label: "Юқори", color: "#c2410c", bg: "#fdeee3", rank: 3 },
   medium: { label: "Ўрта", color: "#b45309", bg: "#fdf6e3", rank: 2 },
   low: { label: "Паст", color: "#475569", bg: "#eef1f5", rank: 1 },
 };
 const STATUS = {
   good: { label: "Соз", color: C.good, bg: C.goodBg, Icon: Check },
-  attn: { label: "Эътибор талаб қилади", color: C.attn, bg: C.attnBg, Icon: AlertTriangle },
+  attn: { label: "Таъмирталаб", color: C.attn, bg: C.attnBg, Icon: AlertTriangle },
   fault: { label: "Носоз", color: C.fault, bg: C.faultBg, Icon: ShieldAlert },
 };
 const EQ_TYPES = [
-  "Кучланиш трансформатори", "Куч трансформатори", "Ажратгич (разъединитель)",
-  "Узгич (выключатель)", "Кабель линияси", "Ҳаво линияси", "Ҳимоя релеси",
-  "Электр ҳисоблагич", "Тақсимлаш қалқони (РУ)", "Конденсатор батареяси",
-  "Ер уланиши (заземление)", "Бошқа",
+  "Трансформатор пункти", "Электр узатиш тармоғи", "Подстанция",
+  "Тақсимлаш ускунаси (РУ)", "Бошқа",
 ];
 const PARAM_SUGGEST = ["Номинал кучланиш", "Номинал ток", "Қувват", "Частота", "Ишлаб чиқарилган йили", "Завод рақами"];
 const DEFAULT_REPORT = {

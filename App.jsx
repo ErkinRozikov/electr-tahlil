@@ -649,7 +649,7 @@ function InspectionList({ inspections, defects, reportCfg, open }) {
         <h2 style={{ margin: 0, fontSize: 18 }}>Кўриклар ({inspections.length})</h2>
         {!selectMode ? (
           <button onClick={() => setSelectMode(true)} style={{ display: "flex", alignItems: "center", gap: 6, border: `1px solid ${C.line}`, background: C.white, borderRadius: 9, padding: "8px 12px", fontWeight: 600, fontSize: 13 }}>
-            <FileText size={15} /> Кўп танлаб Word'га
+            <FileText size={15} /> Кўрик далолатномаларини белгилаш
           </button>
         ) : (
           <button onClick={exitSelect} className="ghost" style={{ border: `1px solid ${C.line}`, background: C.white, borderRadius: 9, padding: "8px 12px", fontWeight: 600, fontSize: 13 }}>Бекор</button>
@@ -659,7 +659,7 @@ function InspectionList({ inspections, defects, reportCfg, open }) {
       {selectMode && (
         <div style={{ display: "flex", alignItems: "center", gap: 10, background: "#eef4ff", border: `1px solid ${C.blue}33`, borderRadius: 10, padding: "10px 14px", marginBottom: 12, flexWrap: "wrap" }}>
           <button onClick={toggleAll} className="ghost" style={{ border: `1px solid ${C.line}`, background: C.white, borderRadius: 8, padding: "6px 10px", fontSize: 12.5, fontWeight: 600 }}>
-            {allChecked ? "Танлашни бекор" : "Барчасини танлаш"}
+            {allChecked ? "Танлашларни бекор қилиш" : "Барчасини танлаш"}
           </button>
           <span style={{ flex: 1, fontSize: 13, color: C.ink, fontWeight: 600 }}>{selIds.length} та танланди</span>
           <button onClick={batchWord} disabled={busy || selIds.length === 0}
@@ -676,7 +676,7 @@ function InspectionList({ inspections, defects, reportCfg, open }) {
         </div>
         <select value={f} onChange={(e) => setF(e.target.value)} style={{ ...inputStyle, width: "auto" }}>
           <option value="all">Барча ҳолатлар</option><option value="good">Соз</option>
-          <option value="attn">Эътибор талаб қилади</option><option value="fault">Носоз</option>
+          <option value="attn">Таъмирталаб</option><option value="fault">Носоз</option>
         </select>
       </div>
       {filtered.length === 0 ? (

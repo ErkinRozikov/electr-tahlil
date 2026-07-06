@@ -132,13 +132,13 @@ export const store = {
       await databases.updateDocument(DB, COL_INSP, rec.id, data);
     } else {
       // Янги — фақат эгаси ва админ кўра/ўзгартира олади
+      // Янги — қаторга фақат эгасининг рухсати ёзилади.
+      // Админ ҳужжатларни ЖАДВАЛ даражасидаги рухсат орқали кўради
+      // (inspections жадвалида label:admin ролига Read/Update/Delete берилган бўлиши керак).
       const perms = user ? [
         Permission.read(Role.user(user.$id)),
         Permission.update(Role.user(user.$id)),
         Permission.delete(Role.user(user.$id)),
-        Permission.read(Role.label("admin")),
-        Permission.update(Role.label("admin")),
-        Permission.delete(Role.label("admin")),
       ] : undefined;
       await databases.createDocument(DB, COL_INSP, rec.id, data, perms);
     }
